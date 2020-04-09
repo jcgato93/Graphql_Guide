@@ -11,11 +11,17 @@ interface Person {
   email: String!
 }
 
-type Student implements Person {  
+type Student implements Person {
+  _id: ID!
+  name: String!
+  email: String!
   avatar: String
 }
 
 type Monitor implements Person {
+  _id: ID!
+  name: String!
+  email: String!
   phone: String
 }
 ```
