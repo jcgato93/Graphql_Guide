@@ -65,5 +65,27 @@ module.exports = {
     }
 
     return student
+  },
+  searchItems: async (root , { keyword }) => {
+    let db
+    let items
+    let courses
+    let students
+
+    try {
+      db = await connectDb()
+      courses = await db.collection('courses')
+                .find({ title: {'$regex' : keyword, '$options' : 'i'}})
+                .toArray()
+
+      students = await db.collection('students')
+                      .find({ name: {'$regex' : keyword, '$options' : 'i'}})
+                      .toArray()
+
+      items = [...courses, ...students]                      
+    } catch (error) {
+      errorHandler(error)
+    }
+    return items
   }
 }

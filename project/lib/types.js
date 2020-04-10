@@ -23,5 +23,14 @@ module.exports = {
 
       return peopleData
     }
+  },
+  GlobalSearch: {
+    __resolveType: (item, context, info) => {
+      if(item.title) {
+        return 'Course'
+      }
+
+      return 'Student'
+    }
   }
 }
