@@ -17,20 +17,14 @@ type Course {
   level: LEVEL
 }
 
-interface Person {
-  _id: ID!
-  name: String!
-  email: String!
-}
-
-type Student implements Person {
+type Student {
   _id: ID!
   name: String!
   email: String!
   avatar: String
 }
 
-type Monitor implements Person {
+type Monitor {
   _id: ID!
   name: String!
   email: String!

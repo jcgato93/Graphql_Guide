@@ -2,6 +2,7 @@
 require('dotenv').config()
 const { makeExecutableSchema } = require('graphql-tools')
 const express = require('express')
+const cors = require('cors')
 const gqlMiddleware = require('express-graphql')
 const { readFileSync } = require('fs')
 const { join } = require('path')
@@ -21,6 +22,13 @@ const schema = makeExecutableSchema({
   resolvers
 })
 
+app.use(cors())
+
+app.get("/", function (req, res, next) {    
+  res.redirect("/api")
+  next
+});
+
 app.use('/api', gqlMiddleware({
   schema: schema,
   rootValue: resolvers,
@@ -28,5 +36,5 @@ app.use('/api', gqlMiddleware({
 }))
 
 app.listen(port, () => {
-  console.log(`Server is listening at http://localshost:${port}/api`)
+  console.log(`Server is listening at http://localhost:${port}/api`)
 })
